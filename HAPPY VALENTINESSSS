@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Donut 🍩💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    height:100vh;
+    background:radial-gradient(circle at top,#ffe6f0,#ffd6ea);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Quicksand', sans-serif;
+    overflow:hidden;
+}
+
+/* Floating items */
+.float{
+    position:absolute;
+    animation:rise 7s linear infinite;
+    opacity:0.9;
+}
+
+@keyframes rise{
+    0%{transform:translateY(0) scale(1);opacity:1;}
+    100%{transform:translateY(-1000px) scale(1.4);opacity:0;}
+}
+
+/* Card */
+.card{
+    background:#fff;
+    width:92%;
+    max-width:390px;
+    padding:32px 24px;
+    border-radius:30px;
+    text-align:center;
+    box-shadow:0 30px 60px rgba(255,105,180,0.35);
+    animation:zoomIn 1.2s ease;
+}
+
+@keyframes zoomIn{
+    from{transform:scale(0.5);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
+
+h1{
+    font-family:'Pacifico', cursive;
+    color:#ff4f9a;
+    font-size:30px;
+    margin-bottom:14px;
+}
+
+p{
+    color:#555;
+    font-size:17px;
+    margin-bottom:22px;
+    line-height:1.5;
+}
+
+.highlight{
+    color:#ff4f9a;
+    font-weight:600;
+}
+
+/* Buttons */
+button{
+    padding:12px 28px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+    font-family:'Quicksand', sans-serif;
+    background:#ff4f9a;
+    color:#fff;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+/* Yes No */
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+}
+
+#no{
+    background:#ffd1e8;
+    color:#444;
+    position:relative;
+}
+
+/* Sections */
+.section{display:none;}
+.show{display:block;}
+
+/* Heart beat */
+.beat{
+    animation:beat 1.5s infinite;
+}
+
+@keyframes beat{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+
+/* Music note */
+.music{
+    font-size:14px;
+    color:#ff4f9a;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Audio -->
+<audio id="music" src="iloveyou.mp3"></audio>
+
+<div class="card">
+
+    <!-- ROSE DAY -->
+    <div class="section show" id="rose">
+        <h1 class="beat">Happy Rose Day 🌹</h1>
+        <p>
+            This rose is for my <span class="highlight">DONUT 🍩</span><br>
+            My soft, cute, precious<br>
+            <span class="highlight">Baby Girl 💖</span>
+        </p>
+        <p>
+            If love had a face,<br> it would look exactly like you 🥹
+        </p>
+        <button onclick="next()">Next 💌</button>
+        <div class="music">🎶 Tap next for surprise</div>
+    </div>
+
+    <!-- QUESTION -->
+    <div class="section" id="question">
+        <h1>Hey My Donut 🥰</h1>
+        <p>
+            From Rose Day to every heartbeat,<br>
+            will you stay mine and be my forever? 💞
+        </p>
+
+        <div class="buttons">
+            <button id="yes">Yes always 💕</button>
+            <button id="no">Let me think 🙈</button>
+        </div>
+    </div>
+
+    <!-- FINAL -->
+    <div class="section" id="final">
+        <h1 class="beat">Yayyyy 😍</h1>
+        <p>
+            I knew it, my Baby Girl 💗<br>
+            You are my comfort,<br>
+            my favorite feeling,<br>
+            my forever ♾️
+        </p>
+        <p class="highlight">Happy Valentine’s 💝</p>
+    </div>
+
+</div>
+
+<script>
+/* Floating emojis */
+setInterval(()=>{
+    const e=document.createElement("div");
+    e.classList.add("float");
+    e.innerHTML=["💖","🌹","✨","💘"][Math.floor(Math.random()*4)];
+    e.style.left=Math.random()*100+"vw";
+    e.style.fontSize=Math.random()*20+18+"px";
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),7000);
+},300);
+
+/* Next section + music */
+function next(){
+    document.getElementById("rose").classList.remove("show");
+    document.getElementById("question").classList.add("show");
+    document.getElementById("music").play();
+}
+
+/* No button escape */
+const no=document.getElementById("no");
+no.addEventListener("mouseover",()=>{
+    no.style.left=Math.random()*140-70+"px";
+    no.style.top=Math.random()*140-70+"px";
+});
+
+/* Yes */
+document.getElementById("yes").addEventListener("click",()=>{
+    document.getElementById("question").classList.remove("show");
+    document.getElementById("final").classList.add("show");
+});
+</script>
+
+</body>
+</html>
