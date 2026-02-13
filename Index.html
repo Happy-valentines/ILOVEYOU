@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Donut 🍩💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    height:100vh;
+    background:linear-gradient(135deg,#ffd6ea,#ffeaf4);
+    font-family:'Poppins',sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* floating hearts & kisses */
+.float{
+    position:absolute;
+    animation:float 7s linear infinite;
+    pointer-events:none;
+}
+@keyframes float{
+    0%{transform:translateY(0) scale(1);opacity:1;}
+    100%{transform:translateY(-120vh) scale(1.6);opacity:0;}
+}
+
+/* page transition */
+.section{
+    display:none;
+    animation:slide .8s ease;
+}
+.show{display:block;}
+@keyframes slide{
+    from{transform:translateY(40px);opacity:0;}
+    to{transform:translateY(0);opacity:1;}
+}
+
+/* card */
+.card{
+    background:#fff;
+    width:94%;
+    max-width:420px;
+    padding:28px;
+    border-radius:32px;
+    text-align:center;
+    box-shadow:0 30px 70px rgba(255,80,150,0.35);
+}
+
+/* text */
+h1{
+    font-family:'Great Vibes',cursive;
+    color:#ff2f92;
+    font-size:38px;
+}
+h2{color:#ff2f92;margin:8px 0;}
+p{color:#555;margin:12px 0;line-height:1.6;}
+
+.donut{
+    font-size:34px;
+    animation:donut 1.5s ease infinite alternate;
+}
+@keyframes donut{
+    from{transform:scale(1);}
+    to{transform:scale(1.1);}
+}
+
+button{
+    padding:12px 28px;
+    border:none;
+    border-radius:30px;
+    margin:6px;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+button:hover{transform:scale(1.1);}
+.primary{background:#ff2f92;color:#fff;}
+.soft{background:#ffd1e8;}
+
+img,video{
+    width:100%;
+    max-height:220px;
+    object-fit:contain;
+    margin:12px 0;
+    border-radius:20px;
+}
+
+.letter{
+    font-family:'Dancing Script',cursive;
+    background:#fff0f8;
+    padding:20px;
+    border-radius:20px;
+    font-size:22px;
+    border:2px solid #ff2f92;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" src="iloveyou.mp3" loop></audio>
+
+<script>
+/* floating emojis */
+setInterval(()=>{
+    const e=document.createElement("div");
+    e.className="float";
+    e.innerHTML=["💖","💋","✨","💘","🌹"][Math.floor(Math.random()*5)];
+    e.style.left=Math.random()*100+"vw";
+    e.style.fontSize=Math.random()*26+18+"px";
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),7000);
+},220);
+
+/* confetti burst */
+function burst(){
+    for(let i=0;i<20;i++){
+        const b=document.createElement("div");
+        b.className="float";
+        b.innerHTML="💖";
+        b.style.left="50%";
+        b.style.fontSize="26px";
+        document.body.appendChild(b);
+        setTimeout(()=>b.remove(),1200);
+    }
+}
+
+function show(id){
+    document.querySelectorAll(".section").forEach(s=>s.classList.remove("show"));
+    document.getElementById(id).classList.add("show");
+    document.getElementById("music").play();
+}
+</script>
+
+<div class="card">
+
+<!-- SCREEN 1 -->
+<div class="section show" id="s1">
+<img src="s1.gif">
+<h1>Will You Be Mine 🥹🤭</h1>
+<p>Valentine’s feels empty without you, Donut 🍩</p>
+<button class="primary" id="yes">YES</button>
+<button class="soft" id="no">NO</button>
+</div>
+
+<!-- ROSE DAY -->
+<div class="section" id="rose">
+<img src="rose.gif">
+<h1>Rose Day 🌹</h1>
+<p>This rose carries all my love for you 💖</p>
+<button class="primary" onclick="show('kiss')">Next</button>
+</div>
+
+<!-- KISS DAY -->
+<div class="section" id="kiss">
+<img src="kiss.gif">
+<h1>Kiss Day 💋</h1>
+<p>If love had a taste, it would be you.</p>
+<button class="primary" onclick="show('valentine')">Next</button>
+</div>
+
+<!-- VALENTINE -->
+<div class="section" id="valentine">
+<img src="valentine.gif">
+<h1>Happy Valentine’s Day</h1>
+<h2 class="donut">DONUT 🍩</h2>
+<p>You are my favorite forever.</p>
+<button class="primary" onclick="show('gifts');burst()">SEE MY GIFTS</button>
+</div>
+
+<!-- GIFTS -->
+<div class="section" id="gifts">
+<img src="gifts.gif">
+<h1>Happy Valentine’s Day 💘</h1>
+<h2 class="donut">My Donut 🍩</h2>
+<p>Each gift hides a piece of my heart.</p>
+<button class="primary" onclick="startQuiz();burst()">🎁 Gift 1</button>
+<button class="primary" onclick="show('gift2');burst()">💌 Gift 2</button>
+<button class="primary" onclick="show('gift3');burst()">🎥 Gift 3</button>
+</div>
+
+<!-- QUIZ -->
+<div class="section" id="quiz">
+<img src="quiz.gif">
+<h1>Quiz 💕</h1>
+<p id="q"></p>
+<div id="opts"></div>
+<p id="fb" style="color:red"></p>
+</div>
+
+<!-- QUIZ DONE -->
+<div class="section" id="done">
+<h1>You Passed 😍</h1>
+<p>I Love Uhh 💖</p>
+<button class="primary" onclick="show('gifts')">Back</button>
+</div>
+
+<!-- GIFT 2 -->
+<div class="section" id="gift2">
+<img src="letter.gif">
+<h1>For You 💌</h1>
+<div class="letter">
+My baby Donut 🍩,<br><br>
+You are my safest place,
+my loudest happiness,
+my forever choice.<br><br>
+I love you endlessly 💖
+</div>
+<button class="primary" onclick="show('gifts')">Back</button>
+</div>
+
+<!-- GIFT 3 -->
+<div class="section" id="gift3">
+<img src="video.gif">
+<h1>Something Special 🎥</h1>
+<video controls autoplay loop>
+<source src="special.mp4" type="video/mp4">
+</video>
+<p>This moment is ours forever 💕</p>
+<button class="primary" onclick="show('gifts')">Back</button>
+</div>
+
+</div>
+
+<script>
+let noCount=0;
+document.getElementById("no").onclick=()=>{
+    noCount++;
+    document.getElementById("yes").style.transform=`scale(${1+noCount*.4})`;
+    if(noCount>=2) document.getElementById("no").style.display="none";
+};
+document.getElementById("yes").onclick=()=>show("rose");
+
+/* Quiz logic */
+const quiz=[
+{q:"WHO'S THE ABSOLUTE BOSS?",o:["ME","OBVIOUSLY YOU","BOTH"],c:1},
+{q:"WHO FIGHTS THE MOST?",o:["ME","NO ONE","OBVIOUSLY YOU"],c:0},
+{q:"WHO IS MY BABY GIRL?",o:["YOU","YES YOU","OBVIOUSLY YOU"],c:"all"}
+];
+let i=0;
+function startQuiz(){i=0;show("quiz");render();}
+function render(){
+    fb.innerText="";
+    q.innerText=quiz[i].q;
+    opts.innerHTML="";
+    quiz[i].o.forEach((t,x)=>{
+        const b=document.createElement("button");
+        b.innerText=t;
+        b.onclick=()=>ans(x);
+        opts.appendChild(b);
+    });
+}
+function ans(x){
+    const qz=quiz[i];
+    if(qz.c==="all"||x===qz.c){
+        i++;
+        if(i>=quiz.length) show("done");
+        else render();
+    }else fb.innerText="Incorrect ❌";
+}
+</script>
+
+</body>
+</html>
